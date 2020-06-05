@@ -11,13 +11,12 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
 
 def load_data(database_filepath):
     """
@@ -104,12 +103,11 @@ def build_model():
             ('starting_verb', StartingVerbExtractor())
         ])),
 
-        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
     parameters = {
-        'clf__estimator__n_estimators': [10, 40],
-        'clf__estimator__min_samples_leaf': [2, 5]
+        'clf__estimator__n_estimators': [50, 100],
         }
     tuned_model = GridSearchCV(model,param_grid=parameters)
     return tuned_model
@@ -126,9 +124,9 @@ def evaluate_model(model, X_test, Y_test, category_names):
     category_names -- label names to be evaluated
     """
     Y_pred = model.predict(X_test)
-    for i, col in enumerate(Y_test):
-        print("Category: {}".format(col))
-        print(classification_report(Y_test[col], Y_pred[:, i]))
+    for i in range(len(category_names)):
+        print("Category:", category_names[i],"\n", classification_report(y_test.iloc[:, i].values, y_pred[:, i]))
+        print('Accuracy of %25s: %.2f\n\n' %(category_names[i], accuracy_score(y_test.iloc[:, i].values, y_pred[:,i])))
 
 
 def save_model(model, model_filepath):

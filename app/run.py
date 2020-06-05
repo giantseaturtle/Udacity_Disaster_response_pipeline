@@ -17,7 +17,10 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
-
+    """
+    Extract the starting verb of text, create a new feature for classifier
+    """
+    
     def starting_verb(self, text):
         sentence_list = nltk.sent_tokenize(text)
         for sentence in sentence_list:

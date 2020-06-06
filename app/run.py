@@ -20,7 +20,7 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     """
     Extract the starting verb of text, create a new feature for classifier
     """
-    
+
     def starting_verb(self, text):
         sentence_list = nltk.sent_tokenize(text)
         for sentence in sentence_list:
@@ -61,14 +61,19 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/index')
 def index():
 
-    # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # extract data needed for graph_one
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    # extract data needed for graph_two
+    categories = df.iloc[:,4:]
+    categories_count = categories.sum().sort_values(ascending=False)[1:11]
+    categories_names = list(categories_count.index)
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        # graph_one
         {
             'data': [
                 Bar(
@@ -84,6 +89,26 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+
+        # graph_two
+        {
+            'data': [
+                Bar(
+                    y=categories_count,
+                    x=categories_names,
+                )
+            ],
+
+            'layout': {
+                'title': 'Top 10 Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
                 }
             }
         }

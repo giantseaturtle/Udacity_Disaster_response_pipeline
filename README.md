@@ -33,7 +33,7 @@ This project was written by Python 3.7, including following packages:
 ### Example
 In the web app, it will classify the import text message in categories, the results will be sent to appropriate organization, so the service or help can be delivered in time. 
 
-For instance, typing "We have quarantined in our apartment for seven days, we need food!", the message will be tagged as "related", "request", "Food", and "Direct Report", this message can be accurately assigned to food-aid related organization.
+For instance, typing "We have quarantined in our apartment for seven days, we need food!", the message will be tagged as "Related", "Request", "Food", and "Direct Report", this message can be accurately assigned to food-aid related organization.
 ![screenshot2](https://user-images.githubusercontent.com/49320590/83955014-10a0b000-a814-11ea-91a2-236b62938304.png)
 
 ### License

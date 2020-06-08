@@ -13,7 +13,7 @@ This project was written by Python 3.7, including following packages:
 ### Description of files
 - Screenshot: Screenshot the layout of web app
 - app: Deploy and visualize the cleaned database, as well as the trained ML model
-- Data: Loads the disaster_messages and disaster_categories datasets, clean and merge them into SQLite database
+- Data: Load the disaster_messages and disaster_categories datasets, clean and merge them into SQLite database
 - Model: Import the cleaned data, transform it with NLP, run a machine learning model on it with GridSearchCV.
 
 ### Instructions
@@ -31,7 +31,7 @@ This project was written by Python 3.7, including following packages:
 ![screenshot1](https://user-images.githubusercontent.com/49320590/83955013-08487500-a814-11ea-8f4b-5ebb6abe224e.png)
 
 ### Example
-In the web app, it will classify the import text message in categories, the results will be sent to appropriate organization, so the service or help can be delivered in time. 
+In the web app, it will classify the import text message in categories, the results could be sent to any related organizations, so the service or help can be delivered in time. 
 
 For instance, typing "We have quarantined in our apartment for seven days, we need food!", the message will be tagged as "Related", "Request", "Food", and "Direct Report", this message can be accurately assigned to food-aid related organization.
 ![screenshot2](https://user-images.githubusercontent.com/49320590/83955014-10a0b000-a814-11ea-91a2-236b62938304.png)
